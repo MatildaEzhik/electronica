@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>корзина</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>корзина</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">главная</a></li>
+                <li><a href="{% url 'catalog' %}">каталог</a></li>
+                <li><a href="{% url 'checkout' %}">оформление заказа</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>добавленные вами товары:</h2>
+        <div class="cart-items">
+        </div>
+        <a href="{% url 'checkout' %}">перейти к оформлению заказа</a>
+    </main>
+</body>
+</html>

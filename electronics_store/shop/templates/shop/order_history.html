@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>история заказов</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>история заказов</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">главная страница</a></li>
+                <li><a href="{% url 'cart' %}">корзина</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>ваши заказы:</h2>
+        <div class="order-history">
+            {% for order in orders %}
+                <div class="order">
+                    <h3>заказ #{{ order.id }} - {{ order.get_status_display }}</h3>
+                    <p>дата: {{ order.created_at }}</p>
+                    <div class="order-items">
+                        {% for item in order.orderitem_set.all %}
+                            <div class="order-item">
+                                <p>{{ item.product.name }} - {{ item.quantity }} x {{ item.price_at_order }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <p>описание: {{ order.description }}</p>
+                </div>
+            {% empty %}
+                <p>заказов нет</p>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

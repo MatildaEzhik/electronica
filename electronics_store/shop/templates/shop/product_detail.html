@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{{ product.name }}</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">главная страница</a></li>
+                <li><a href="{% url 'catalog' %}">каталог</a></li>
+                <li><a href="{% url 'cart' %}">корзина</a></li>
+                <li><a href="{% url 'order_history' %}">история заказов</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>цена: {{ product.price }}</h2>
+        <p>статусс: {{ product.get_status_display }}</p>
+        <p>в наличии: {{ product.quantity }}</p>
+        {% if product.in_stock %}
+            <p>в наличии</p>
+        {% else %}
+            <p>нет в наличии</p>
+        {% endif %}
+        <h3>отзывы:</h3>
+        <div class="reviews">
+            {% for review in reviews %}
+                <div class="review">
+                    <p><strong>{{ review.user_name }}</strong> - {{ review.rating }}</p>
+                    <p>{{ review.comment }}</p>
+                    <p><small>{{ review.created_at }}</small></p>
+                </div>
+            {% empty %}
+                <p>отзывов нет</p>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

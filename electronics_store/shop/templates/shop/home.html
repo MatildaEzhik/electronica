@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>главная страница</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>магазиг электроники</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">главная</a></li>
+                <li><a href="{% url 'catalog' %}">каталог</a></li>
+                <li><a href="{% url 'cart' %}">корзина</a></li>
+                <li><a href="{% url 'order_history' %}">история заказов</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>популярные товары</h2>
+            <div class="product-list">
+                {% for product in products %}
+                    <div class="product">
+                        <h3>{{ product.name }}</h3>
+                        <p>Цена: {{ product.price }}</p>
+                        <a href="{% url 'product_detail' product.id %}">подробнее</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section>
+            <h2>новинки</h2>
+            <div class="product-list">
+                {% for product in new_products %}
+                    <div class="product">
+                        <h3>{{ product.name }}</h3>
+                        <p>Цена: {{ product.price }}</p>
+                        <a href="{% url 'product_detail' product.id %}">подробнее</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section>
+            <h2>товары со скидкой</h2>
+            <div class="product-list">
+                {% for product in discounted_products %}
+                    <div class="product">
+                        <h3>{{ product.name }}</h3>
+                        <p>цена: {{ product.price }}</p>
+                        <p>скидка: {{ product.discount }}%</p>
+                        <a href="{% url 'product_detail' product.id %}">подробнее</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+
+
+

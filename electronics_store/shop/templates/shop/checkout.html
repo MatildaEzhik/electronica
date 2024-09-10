@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>оформление заказа</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>оформление заказа</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">главная страница</a></li>
+                <li><a href="{% url 'cart' %}">корзина</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form method="post" action="{% url 'checkout' %}">
+            {% csrf_token %}
+            <label for="address">адрес:</label>
+            <input type="text" id="address" name="address" required>
+            <label for="payment_method">метод оплаты:</label>
+            <select id="payment_method" name="payment_method">
+                <option value="credit_card">кредитка</option>
+                <option value="payme">payme</option>
+            </select>
+            <button type="submit">подтвердить заказ</button>
+        </form>
+    </main>
+</body>
+</html>
